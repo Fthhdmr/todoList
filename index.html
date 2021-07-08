@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!--Fontawesome-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!--AnimateJs-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!--Css-->
+    <link rel="stylesheet" href="style.css">
+    <!--Title-->
+    <title>PatikaDev Todo List</title>
+</head>
+<body>
+   
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Yapılacaklar</h2>
+                <i class="far fa-square"></i>
+            </div>
+            <div class="card-body">
+                <ul class="todo-list" id="todo-list">
+                    <div class="todo-item todo">
+                        <li>Evi Topla</li>
+                        <i class="fas fa-square"></i>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div class="todo-item done">
+                        <li>Geç Kalma</li>
+                        <i class="fas fa-check-square"></i>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div class="todo-item todo">
+                        <li>Evi Topla</li>
+                        <i class="fas fa-square"></i>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <div class="todo-item done">
+                        <li>Geç Kalma</li>
+                        <i class="fas fas fa-check-square"></i>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                </ul>
+                <div class="card-footer">
+                    <input type="text" id="toso-input" placeholder="Yeni Yapılacak..">
+                    <button id="todo-button"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+<script src="app.js"></script>    
+
+</body>
+</html>
