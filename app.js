@@ -3,12 +3,47 @@ const todoInput = document.getElementById ('todo-input');
 const todoButton = document.getElementById ('todo-button');
 const todoFilter = document.getElementById ('todo-filter');
 
-const todos = ['evi topla','işi tamamla'];
+const getTodosFromStorage = () => {
+    const storage = JSON.parse (localStorage.getItem('todos'));
+    return (storage) ? storage : [];
+}
 
-const getTodosPage = () => {
+const todos = getTodosFromStorage();
+
+const getTodosToPage = () => {
     todos.forEach((todo) => {
-        
+        createTodoItem(todo);
     });
+}
+
+const saveTodosToStorage = (todo) => {
+    todos.push(todo);
+    localStorage.setItem('todos',JSON.stringify(todos));
+    createTodoItem(todo);
+}
+
+todoButton.addEventListener('click',() => {
+    const input = todoInput.value;
+    if(input) saveTodosToStorage(input);
+    todoInput.value = "";
+})
+
+window.addEventListener('load',() => {
+    getTodosToPage();
+})
+
+const removeTodo = (target) => {
+    const todo = target.parentNode.childNodes[0].innerHTML;
+    removeTodoFromStorage(todo);
+    target.parentNode.remove();
+}
+
+const removeTodoFromStorage = (todo) => {
+    const index = todos.indexOf(todo);
+    if(index > -1){
+        todos.splice(index,1);
+        localStorage.setItem('todos',JSON.stringify(todos));
+    }
 }
 
 const createTodoItem = (text) => {
@@ -20,7 +55,7 @@ const createTodoItem = (text) => {
     todoItemLi.innerHTML = text;
 
     const todoItemCheck = document.createElement('i');
-    todoItemCheck.classList.add('fas','fa-squara');
+    todoItemCheck.classList.add('fas','fa-square');
     todoItemCheck.setAttribute('onclick','checkTodo(this)');
 
     const todoItemRemove = document.createElement('i');
@@ -30,5 +65,5 @@ const createTodoItem = (text) => {
     todoItem.appendChild(todoItemLi);
     todoItem.appendChild(todoItemCheck);
     todoItem.appendChild(todoItemRemove);
-    todoItem.appendChild(todoItem);
+    todoList.appendChild(todoItem);
 }
