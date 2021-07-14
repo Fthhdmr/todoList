@@ -18,7 +18,13 @@ const dones = getTodosFromStorage();
 
 const getTodosToPage = () => {
     todos.forEach((todo) => {
-        createTodoItem(todo);
+        createDoneItem(todo);
+    });
+}
+
+const getDonesToPage = () => {
+    dones.forEach((done) => {
+        createTodoItem(done);
     });
 }
 
@@ -34,14 +40,22 @@ todoButton.addEventListener('click',() => {
     todoInput.value = "";
 })
 
+todoInput.addEventListener('keyup',(event) => {
+    if(event.keyCode === 13) todoButton.click();
+})
+
 window.addEventListener('load',() => {
     getTodosToPage();
+    getDonesToPage();
 })
 
 const removeTodo = (target) => {
     const todo = target.parentNode.childNodes[0].innerHTML;
     removeTodoFromStorage(todo);
-    target.parentNode.remove();
+    target.parentNode.classList.add('animate__animated','animate__slideOutLeft','animate__faster');
+    target.parentNode.addEventListener('animationend',() => {
+        target.parentNode.remove();
+    });
 }
 
 const removeTodoFromStorage = (todo) => {
@@ -102,6 +116,15 @@ const uncheckDone = (target) => {
     moveDoneToTodos(done,target);
 }
 
+const removeDone = (target) => {
+    const done = target.parentNode.childNodes[0].innerHTML;
+    removeDoneFromStorage(done);
+    target.parentNode.classList.add('animate__animated','animate__slideOutLeft','animate__faster');
+    target.parentNode.addEventListener('animationend',() => {
+        target.parentNode.remove();
+    });
+}
+
 const createTodoItem = (text) => {
 
     const todoItem = document.createElement('div');
@@ -123,3 +146,26 @@ const createTodoItem = (text) => {
     todoItem.appendChild(todoItemRemove);
     todoList.appendChild(todoItem);
 }
+
+const createDoneItem = (text) => {
+
+    const todoItem = document.createElement('div');
+    todoItem.classList.add('todo-item','done');
+
+    const todoItemLi = document.createElement('li');
+    todoItemLi.innerHTML = text;
+
+    const todoItemCheck = document.createElement('i');
+    todoItemCheck.classList.add('fas','fa-square');
+    todoItemCheck.setAttribute('onclick','uncheckDone(this)');
+
+    const todoItemRemove = document.createElement('i');
+    todoItemRemove.classList.add('fas','fa-trash-alt');
+    todoItemRemove.setAttribute('onclick','removeDone(this)');
+
+    todoItem.appendChild(todoItemLi);
+    todoItem.appendChild(todoItemCheck);
+    todoItem.appendChild(todoItemRemove);
+    todoList.appendChild(todoItem);
+}
+
