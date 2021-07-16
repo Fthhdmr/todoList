@@ -156,7 +156,7 @@ const createDoneItem = (text) => {
     todoItemLi.innerHTML = text;
 
     const todoItemCheck = document.createElement('i');
-    todoItemCheck.classList.add('fas','fa-square');
+    todoItemCheck.classList.add('fas','fa-check-square');
     todoItemCheck.setAttribute('onclick','uncheckDone(this)');
 
     const todoItemRemove = document.createElement('i');
@@ -169,3 +169,38 @@ const createDoneItem = (text) => {
     todoList.appendChild(todoItem);
 }
 
+todoFilter.addEventListener('click',() => {
+    todoList.dataset.filter = (parseInt(todoList.dataset.filter) + 1) %3;
+    listFilter();
+}); 
+
+const listFilter = () => {
+    const items = todoList.getElementsByClassName('todo-item');
+    let array = [].map.call(items, item => item);
+    const filter = todoList.dataset.filter;
+    array.forEach((item) => {
+        switch (filter) {
+            case '0':
+                todoFilter.className = '';
+                todoFilter.classList.add('far','fa-square');
+                item.style.display = 'flex';
+                break;
+
+            case '1':
+                todoFilter.className = '';
+                todoFilter.classList.add('fas','fa-square');
+                if(item.classList.contains('done')) item.style.display = 'none';
+                else item.style.display = 'flex';
+                break;
+                
+            case '2':
+                todoFilter.className = '';
+                todoFilter.classList.add('fas','fa-check-square');
+                if(item.classList.contains('todo')) item.style.display = 'none';
+                else item.style.display = 'flex';
+                break;      
+
+            default:    
+        }
+    });
+}

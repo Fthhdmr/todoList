@@ -61,6 +61,7 @@ body::after {
 
 .card-header i {
     margin-left: auto;
+    cursor: pointer;
 }
 
 .card-body {
